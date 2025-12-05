@@ -178,3 +178,72 @@ export interface ApiError extends Error {
   };
   message: string;
 }
+
+// ============================================================================
+// Offer Types
+// ============================================================================
+
+export interface Offer {
+  _id: string;
+  partner: Partner | string;
+  title: string;
+  description: string;
+  discount: number;
+  originalPrice: number;
+  discountedPrice: number;
+  category: string;
+  expiryDate: string;
+  isActive: boolean;
+  imageUrl?: string;
+  termsAndConditions?: string;
+  analytics: {
+    views: number;
+    clicks: number;
+    redemptions: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+  isSaved?: boolean;
+}
+
+export interface OfferBrowseResponse {
+  offers: Offer[];
+  isAuthenticated: boolean;
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+
+export interface OfferResponse {
+  offer: Offer;
+  isAuthenticated: boolean;
+}
+
+// ============================================================================
+// Review Types
+// ============================================================================
+
+export interface Review {
+  _id: string;
+  member:
+    | {
+        _id: string;
+        email: string;
+      }
+    | string;
+  partner: string;
+  offer: string;
+  rating: number;
+  comment?: string;
+  partnerResponse?: string;
+  responseDate?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ReviewsResponse {
+  reviews: Review[];
+}
