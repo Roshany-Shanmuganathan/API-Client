@@ -59,7 +59,7 @@ export function PartnerRegisterModal({
       location: {
         street: '',
         city: '',
-        district: undefined,
+        district: '',
         postalCode: '',
       },
       category: '',
@@ -264,7 +264,7 @@ export function PartnerRegisterModal({
                       <FormLabel>District</FormLabel>
                       <Select
                         onValueChange={field.onChange}
-                        value={field.value}
+                        value={field.value || ''}
                         disabled={isLoading}
                       >
                         <FormControl>
