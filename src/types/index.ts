@@ -51,6 +51,12 @@ export interface Member {
  */
 export interface Partner {
   _id: string;
+  userId?:
+    | {
+        _id: string;
+        email: string;
+      }
+    | string;
   partnerName: string;
   shopName: string;
   location: {
