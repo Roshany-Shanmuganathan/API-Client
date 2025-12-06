@@ -247,3 +247,28 @@ export interface Review {
 export interface ReviewsResponse {
   reviews: Review[];
 }
+
+// ============================================================================
+// Analytics Types
+// ============================================================================
+
+export interface PartnerAnalyticsOffer {
+  id: string;
+  title: string;
+  views: number;
+  clicks: number;
+  redemptions: number;
+}
+
+export interface PartnerAnalytics {
+  totalOffers: number;
+  activeOffers: number;
+  totalViews: number;
+  totalClicks: number;
+  totalRedemptions: number;
+  offers: PartnerAnalyticsOffer[];
+}
+
+export interface PartnerAnalyticsResponse {
+  analytics: PartnerAnalytics;
+}
