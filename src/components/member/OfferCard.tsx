@@ -92,7 +92,7 @@ export function OfferCard({
         </div>
 
         <div className="space-y-1 text-sm text-muted-foreground">
-          {offer.partner?.location && (
+          {typeof offer.partner === 'object' && offer.partner?.location && (
             <div className="flex items-center gap-1">
               <MapPin className="h-3 w-3" />
               <span>{offer.partner.location.city}</span>
