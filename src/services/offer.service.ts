@@ -95,3 +95,78 @@ export const fetchOfferReviewsServer = async (offerId: string): Promise<Review[]
   }
 };
 
+export const partnerOfferService = {
+  createOffer: async (data: {
+    title: string;
+    description: string;
+    discount: number;
+    originalPrice: number;
+    discountedPrice: number;
+    category: string;
+    expiryDate: string;
+    imageUrl?: string;
+    termsAndConditions?: string;
+  }): Promise<ApiResponse<{ offer: Offer }>> => {
+    const response = await apiClient.post<ApiResponse<{ offer: Offer }>>('/offers', data);
+    return response.data;
+  },
+
+  getPartnerOffers: async (): Promise<ApiResponse<{ offers: Offer[] }>> => {
+    const response = await apiClient.get<ApiResponse<{ offers: Offer[] }>>(
+      '/offers/partner/my-offers'
+    );
+    return response.data;
+  },
+
+  getPartnerOffer: async (id: string): Promise<ApiResponse<{ offer: Offer }>> => {
+    const response = await apiClient.get<ApiResponse<{ offer: Offer }>>(
+      `/offers/partner/${id}`
+    );
+    return response.data;
+  },
+
+  updateOffer: async (
+    id: string,
+    data: {
+      title?: string;
+      description?: string;
+      discount?: number;
+      originalPrice?: number;
+      discountedPrice?: number;
+      category?: string;
+      expiryDate?: string;
+      imageUrl?: string;
+      termsAndConditions?: string;
+      isActive?: boolean;
+    }
+  ): Promise<ApiResponse<{ offer: Offer }>> => {
+    const response = await apiClient.put<ApiResponse<{ offer: Offer }>>(`/offers/${id}`, data);
+    return response.data;
+  },
+
+  deleteOffer: async (id: string): Promise<ApiResponse<null>> => {
+    const response = await apiClient.delete<ApiResponse<null>>(`/offers/${id}`);
+    return response.data;
+  },
+
+  getCategories: async (): Promise<ApiResponse<{ categories: string[] }>> => {
+    const response = await apiClient.get<ApiResponse<{ categories: string[] }>>(
+      '/offers/categories'
+    );
+    return response.data;
+  },
+
+  addCategory: async (name: string): Promise<ApiResponse<{ category: string }>> => {
+    const response = await apiClient.post<ApiResponse<{ category: string }>>(
+      '/offers/categories',
+      { name }
+    );
+    return response.data;
+  },
+
+  deleteCategory: async (name: string): Promise<ApiResponse<null>> => {
+    const response = await apiClient.delete<ApiResponse<null>>(`/offers/categories/${encodeURIComponent(name)}`);
+    return response.data;
+  },
+};
+

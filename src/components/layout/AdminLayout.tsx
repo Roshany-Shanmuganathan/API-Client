@@ -24,6 +24,7 @@ import {
   BarChart3,
   Settings,
   LogOut,
+  Tag,
 } from 'lucide-react';
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -50,6 +51,11 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
       title: 'Users',
       icon: Users,
       href: '/admin/users',
+    },
+    {
+      title: 'Categories',
+      icon: Tag,
+      href: '/admin/categories',
     },
     {
       title: 'Analytics',
