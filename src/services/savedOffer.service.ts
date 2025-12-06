@@ -1,4 +1,4 @@
-import apiClient from '@/utils/axios';
+import apiClient from '@/lib/apiClient';
 import type { ApiResponse, Offer } from '@/types';
 
 export const savedOfferService = {

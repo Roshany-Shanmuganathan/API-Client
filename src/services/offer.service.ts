@@ -1,4 +1,4 @@
-import apiClient from '@/utils/axios';
+import apiClient from '@/lib/apiClient';
 import type {
   ApiResponse,
   OfferBrowseResponse,
@@ -42,7 +42,7 @@ export const fetchOffersServer = async (limit: number = 10): Promise<Offer[]> =>
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
     const response = await fetch(`${baseUrl}/offers?limit=${limit}`, {
-      cache: 'no-store',
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     if (!response.ok) {
@@ -61,7 +61,7 @@ export const fetchOfferServer = async (id: string): Promise<Offer | null> => {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
     const response = await fetch(`${baseUrl}/offers/${id}`, {
-      cache: 'no-store',
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     if (!response.ok) {
@@ -80,7 +80,7 @@ export const fetchOfferReviewsServer = async (offerId: string): Promise<Review[]
   try {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
     const response = await fetch(`${baseUrl}/offers/${offerId}/reviews`, {
-      cache: 'no-store',
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     if (!response.ok) {

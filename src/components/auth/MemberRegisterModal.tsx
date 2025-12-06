@@ -30,7 +30,7 @@ import {
 import {
   memberRegisterSchema,
   type MemberRegisterFormData,
-} from '@/validations';
+} from '@/lib/validations';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 import type { ApiError } from '@/types';

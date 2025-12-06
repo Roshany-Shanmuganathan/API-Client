@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { loginSchema, type LoginFormData } from '@/validations';
+import { loginSchema, type LoginFormData } from '@/lib/validations';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 import type { ApiError } from '@/types';

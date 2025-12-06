@@ -1,4 +1,4 @@
-import apiClient from '@/utils/axios';
+import apiClient from '@/lib/apiClient';
 import type { ApiResponse, Review } from '@/types';
 
 export interface CreateReviewData {

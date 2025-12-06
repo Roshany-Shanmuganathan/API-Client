@@ -1,4 +1,4 @@
-import apiClient from '@/utils/axios';
+import apiClient from '@/lib/apiClient';
 import type { ApiResponse } from '@/types';
 
 export interface Notification {

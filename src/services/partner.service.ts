@@ -6,7 +6,7 @@
  */ 
 
 import type { ApiResponse, Partner, PartnerApprovalResponse } from "@/types";
-import apiClient from "@/utils/axios";
+import apiClient from "@/lib/apiClient";
 
 /**
  * Partner API service

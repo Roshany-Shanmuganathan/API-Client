@@ -7,6 +7,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
+import Cookies from "js-cookie";
 import type {
   User,
   Partner,
@@ -39,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const refreshUser = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       if (!token) {
         setUser(null);
         setLoading(false);
@@ -48,19 +49,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const response = await authService.getMe();
       if (response.success) {
+        Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 }); // Update user cookie
         setUser({
           ...response.data.user,
           partner: response.data.partner,
           member: response.data.member,
         });
       } else {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        Cookies.remove("token");
+        Cookies.remove("user");
         setUser(null);
       }
     } catch (error) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      Cookies.remove("token");
+      Cookies.remove("user");
       setUser(null);
     } finally {
       setLoading(false);
@@ -75,8 +77,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await authService.login({ email, password });
       if (response.success) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        Cookies.set("token", response.data.token, { expires: 7 }); // 7 days expiry
+        Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 }); // For middleware role checks
 
         setUser({
           ...response.data.user,
@@ -112,15 +114,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       if (token) {
         await authService.logout();
       }
     } catch (error) {
       // Continue with logout even if API call fails
     } finally {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
+      Cookies.remove("token");
+      Cookies.remove("user");
       setUser(null);
       router.push("/");
     }
@@ -130,8 +132,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await authService.registerMember(data);
       if (response.success) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        Cookies.set("token", response.data.token, { expires: 7 }); // 7 days expiry
+        Cookies.set("user", JSON.stringify(response.data.user), { expires: 7 }); // For middleware role checks
 
         setUser({
           ...response.data.user,

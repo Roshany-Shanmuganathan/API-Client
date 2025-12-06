@@ -27,7 +27,7 @@ import {
   partnerRegisterSchema,
   SRI_LANKAN_DISTRICTS,
   type PartnerRegisterFormData,
-} from '@/validations';
+} from '@/lib/validations';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';

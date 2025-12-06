@@ -13,7 +13,7 @@ import type {
   PartnerRegisterRequest,
   Partner,
 } from "@/types";
-import apiClient from "@/utils/axios";
+import apiClient from "@/lib/apiClient";
 
 /**
  * Authentication API service
